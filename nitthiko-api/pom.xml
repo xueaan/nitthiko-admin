@@ -44,6 +44,11 @@
             <groupId>com.nitthiko</groupId>
             <artifactId>nitthiko-system</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.nitthiko</groupId>
+            <artifactId>nitthiko-common</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
