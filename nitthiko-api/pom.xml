@@ -40,10 +40,29 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Spring AOP 支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.nitthiko</groupId>
             <artifactId>nitthiko-system</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.nitthiko</groupId>
+            <artifactId>nitthiko-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nitthiko</groupId>
+            <artifactId>nitthiko-framework</artifactId>
+        </dependency>
+
+       
+
     </dependencies>
 
     <build>

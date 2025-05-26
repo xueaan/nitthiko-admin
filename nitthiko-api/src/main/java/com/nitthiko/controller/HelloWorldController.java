@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nitthiko.domain.dto.UserCreateParam;
-
+import com.nitthiko.result.Result;
 import jakarta.validation.Valid;
 
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
  * 测试控制器
@@ -26,17 +25,15 @@ public class HelloWorldController {
      * @return 测试数据
      */
     @GetMapping("/hello")
-    public Map<String, Object> hello() {
+    public  Result<String> hello() {
         logger.info("HelloWorldController init");
-        Map<String, Object> result = new HashMap<>();
-        result.put("code", 200);
-        result.put("message", "Hello World!");
-        result.put("data", "RBAC后台管理系统测试成功");
-        return result;
+        
+        return Result.success("Hello World","系统启动成功");
     }
 
     @PostMapping("/user/create")
-    public String createUser(@RequestBody @Valid UserCreateParam param){
-        return "success" + param.getUsername();
+    public Result<String> createUser(@RequestBody @Valid UserCreateParam param){
+       // 正常情况返回成功
+       return Result.success("创建用户成功：" + param.getUsername());
     }
 }
