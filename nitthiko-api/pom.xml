@@ -39,6 +39,11 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.nitthiko</groupId>
+            <artifactId>nitthiko-system</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -49,6 +54,14 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.nitthiko.NitthikoApplication</mainClass>
+                    <!-- 排除依赖配置 -->
+                    <excludes>
+                        <!-- 排除 lombok 依赖，避免将 lombok 打包到最终的 jar 包中 -->
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
