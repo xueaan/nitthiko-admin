@@ -26,6 +26,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>3.2.0</spring-boot.version>
+        <!-- 统一管理 janino 版本号 -->
+        <janino.version>3.1.9</janino.version>
     </properties>
 
     <!-- 依赖管理 -->
@@ -61,6 +63,14 @@
                 <artifactId>nitthiko-generator</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <!-- logback 条件表达式需要 janino -->
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>janino</artifactId>
+                <version>${janino.version}</version>
+            </dependency>
+            
         </dependencies>
     </dependencyManagement>
 
