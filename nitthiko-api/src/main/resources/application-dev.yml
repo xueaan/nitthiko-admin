@@ -1,81 +1,62 @@
-server:
-  port: 9001
-  servlet:
-    # API接口统一访问前缀路径
-    context-path: /api
-
 spring:
-  application:
-    name: nitthiko
-  profiles:
-    active: dev
-
-# 应用配置
-app:
-  # 基础包名配置，用于统一管理项目包名
-  base-package: com.nitthiko
-
-# SpringDoc配置
-springdoc:
-  # 默认配置
-  api-docs:
-    path: /v3/api-docs
-  swagger-ui:
-    path: /swagger-ui.html
-    doc-expansion: none
-    default-model-rendering: model
-    default-models-expand-depth: 1
-  group-configs:
-    - group: 'default'
-      paths-to-match: '/**'
-      packages-to-scan: ${app.base-package}
-
----
-# 开发环境配置
-spring:
-  config:
-    activate:
-      on-profile: dev
-springdoc:
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-
----
-# 测试环境配置
-spring:
-  config:
-    activate:
-      on-profile: test
-springdoc:
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-
----
-# 生产环境配置
-spring:
-  config:
-    activate:
-      on-profile: prod
-springdoc:
-  api-docs:
-    enabled: false
-  swagger-ui:
-    enabled: false
-
-
-# 日志配置
-logging:
-  # 日志文件路径配置
-  path:
-    # Windows环境下的日志路径
-    windows: D:\D09Repos\Logs\${spring.application.name}\logs
-    # Linux环境下的日志路径
-    linux: /var/log/${spring.application.name}
-  level:
-    # 设置基础包下的日志级别为debug
-    # 日志级别从低到高依次是：TRACE, DEBUG, INFO, WARN, ERROR, OFF。设置日志级别为debug意味着该包下的类将会记录DEBUG级别及以上的日志信息，包括DEBUG, INFO, WARN, 和ERROR级别的日志。
-    ${app.base-package}: debug
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3309/nitthiko_admin?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: toor
+    druid:
+      # 初始连接数
+      initial-size: 5
+      # 最小连接池数量
+      min-idle: 10
+      # 最大连接池数量
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      max-evictable-idle-time-millis: 900000
+      # 配置检测连接是否有效
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 监控统计拦截的filters
+      filters: stat,wall
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filter:
+        stat:
+          enabled: true
+          # 慢SQL记录
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+      # 配置DruidStatFilter
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+      # 配置DruidStatViewServlet
+      stat-view-servlet:
+        enabled: true
+        url-pattern: "/druid/*"
+        # IP白名单(没有配置或者为空，则允许所有访问)
+        allow: 127.0.0.1
+        # IP黑名单 (存在共同时，deny优先于allow)
+        deny:
+        # 禁用HTML页面上的"Reset All"功能
+        reset-enable: false
+        # 登录名
+        login-username: admin
+        # 登录密码
+        login-password: 123456
