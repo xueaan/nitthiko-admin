@@ -11,7 +11,7 @@
 
     <artifactId>nitthiko-api</artifactId>
     <name>nitthiko-api</name>
-    <description>API模块，包含启动类</description>
+    <description>API模块,包含启动类</description>
 
     <dependencies>
         <!-- 基本的 Spring Boot Web 依赖 -->

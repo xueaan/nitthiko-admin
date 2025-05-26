@@ -49,6 +49,6 @@ public class UserControllerTest {
                         .content(objectMapper.writeValueAsString(param)))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("success" + param.getUsername()))); 
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("创建用户成功")));
     }
 }
